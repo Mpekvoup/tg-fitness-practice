@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Заявки на тренировки</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+    <style>
+      body {
+        background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+        min-height: 100vh;
+      }
+      .display-1 {
+        color: #1b2845;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-align: center;
+        padding-bottom: 20px;
+      }
+      .card {
+        border-radius: 22px;
+        box-shadow: 0 4px 24px rgba(30, 60, 114, 0.12);
+        background: #fff;
+        border: none;
+      }
+      .card-header {
+        background: #1b2845;
+        color: #fff;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border-radius: 22px 22px 0 0;
+        text-align: center;
+      }
+      .card-body {
+        background: #f7fafc;
+        color: #222e50;
+      }
+      .card-footer {
+        background: #fff;
+        border-radius: 0 0 22px 22px;
+      }
+      .btn-danger {
+        background: #e94f37;
+        border: none;
+        font-weight: 600;
+        letter-spacing: 1px;
+        border-radius: 12px;
+        transition: background 0.2s;
+      }
+      .btn-danger:hover {
+        background: #d7263d;
+      }
+      .col-md-3 {
+        min-width: 320px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="pt-5 pb-5 container">
+      <h1 class="display-1 mb-4">Заявки на тренировки</h1>
+      <div class="row justify-content-center">
+        {% for booking in bookings %}
+          <div class="col-md-3 mb-4 d-flex align-items-stretch">
+            <div class="card mb-3 w-100">
+              <div class="card-header">ID заявки: {{ booking.0 }}</div>
+              <div class="card-body">
+                <p class="card-text"><b>Имя:</b> {{ booking.1 }}</p>
+                <p class="card-text"><b>Телефон:</b> {{ booking.2 }}</p>
+                <p class="card-text"><b>Тренер:</b> {{ booking.3 }}</p>
+                <p class="card-text"><b>Тренировка:</b> {{ booking.4 }}</p>
+                <p class="card-text"><b>Дата:</b> {{ booking.5 }}</p>
+                <p class="card-text"><b>Время:</b> {{ booking.6 }}</p>
+                <p class="card-text"><b>Зал:</b> {{ booking.7 }}</p>
+              </div>
+              <div class="card-footer">
+                <form action="{{ url_for('delete', booking_id=booking.0) }}" method="post">
+                  <button type="submit" class="btn btn-danger">Удалить</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <script>
+            console.log({bookings});
+        </script>
+    </div>
+  </body>
+</html>
